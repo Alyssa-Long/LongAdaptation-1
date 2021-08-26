@@ -10,7 +10,7 @@ clear all;
 clc
 
 % update subject ID
-subID = 'CTR_04';
+subID = 'CTS_06';
 
 % Assign locations of data
 nexus=['Y:\Dulce\R01_Nimbus2021\',subID,'\New Session'];
@@ -20,8 +20,8 @@ PC2=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC2'];
 cd(nexus)
 %% Data info
 % update t and tt
-t=14;
-tt=2;
+t=21;
+tt=1;
 R=2;
 ini=1;
 data_PC1=[];
@@ -35,15 +35,47 @@ else        %Trial numbers above 10 don't have 0 before trial number
 end
 [analogs,analogsInfo]=btkGetAnalogs(H);
 
-column_PC1=55;
-column_PC2=67;
+column_PC1=70;
+column_PC2=70;
 
 %% Concatenate EMG Trial Data
 % sampled at 2000 Hz, so need to cut data down by half (R = 2) to get at
 % same sampling frequency as force data (1000 Hz)
 
 %% PC1 trial concatenation
+if t<10
 switch tt
+    case(1)
+        load([PC1,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC1_1 = EMGdata;
+        data_PC1 = EMGDataPC1_1;
+    case(2)
+        load([PC1,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC1_1 = EMGdata;
+        load([PC1,'\EMG_Trial0',num2str(t),'_2']);
+        EMGDataPC1_2 = EMGdata;
+        data_PC1 = [EMGDataPC1_1;EMGDataPC1_2];
+    case(3)
+        load([PC1,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC1_1 = EMGdata;
+        load([PC1,'\EMG_Trial0',num2str(t),'_2']);
+        EMGDataPC1_2 = EMGdata;
+        load([PC1,'\EMG_Trial0',num2str(t),'_3']);
+        EMGDataPC1_3 = EMGdata;
+        data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3];
+    case(4)
+        load([PC1,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC1_1 = EMGdata;
+        load([PC1,'\EMG_Trial0',num2str(t),'_2']);
+        EMGDataPC1_2 = EMGdata;
+        load([PC1,'\EMG_Trial0',num2str(t),'_3']);
+        EMGDataPC1_3 = EMGdata;
+        load([PC1,'\EMG_Trial0',num2str(t),'_4']);
+        EMGDataPC1_4 = EMGdata;
+        data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3;EMGDataPC1_4];
+end
+else
+    switch tt
     case(1)
         load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
@@ -72,10 +104,43 @@ switch tt
         load([PC1,'\EMG_Trial',num2str(t),'_4']);
         EMGDataPC1_4 = EMGdata;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3;EMGDataPC1_4];
+    end
 end
 
 %% PC2
+if t<10
 switch tt
+    case(1)
+        load([PC2,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC2_1 = EMGdata;
+        data_PC2 = EMGDataPC2_1;
+    case(2)
+        load([PC2,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC2_1 = EMGdata;
+        load([PC2,'\EMG_Trial0',num2str(t),'_2']);
+        EMGDataPC2_2 = EMGdata;
+        data_PC2 = [EMGDataPC2_1;EMGDataPC2_2];
+    case(3)
+        load([PC2,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC2_1 = EMGdata;
+        load([PC2,'\EMG_Trial0',num2str(t),'_2']);
+        EMGDataPC2_2 = EMGdata;
+        load([PC2,'\EMG_Trial0',num2str(t),'_3']);
+        EMGDataPC2_3 = EMGdata;
+        data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3];
+    case(4)
+        load([PC2,'\EMG_Trial0',num2str(t),'_1']);
+        EMGDataPC2_1 = EMGdata;
+        load([PC2,'\EMG_Trial0',num2str(t),'_2']);
+        EMGDataPC2_2 = EMGdata;
+        load([PC2,'\EMG_Trial0',num2str(t),'_3']);
+        EMGDataPC2_3 = EMGdata;
+        load([PC2,'\EMG_Trial0',num2str(t),'_4']);
+        EMGDataPC2_4 = EMGdata;
+        data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3;EMGDataPC2_4];
+end
+else
+    switch tt
     case(1)
         load([PC2,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC2_1 = EMGdata;
@@ -104,6 +169,7 @@ switch tt
         load([PC2,'\EMG_Trial',num2str(t),'_4']);
         EMGDataPC2_4 = EMGdata;
         data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3;EMGDataPC2_4];
+    end
 end
 
        
